@@ -1,7 +1,7 @@
 {
     "builds": [{
         "src": "core/wsgi.py",
-        "use": "https://bootstrap.pypa.io/pip/3.6/get-pip.py",
+        "use": "@vercel/python3.7",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     }],
     "routes": [
