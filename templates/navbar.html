@@ -1,0 +1,28 @@
+<style>
+.dev {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+</style>
+<nav class="navbar bg-body-tertiary">
+  <div class="d-flex p-3">
+    {% if request.user.is_authenticated %}
+    <div>
+      <a href="{% url 'logout' %}">Logout</a>
+    </div>
+    {% else %}
+    <div>
+      <a href="{% url 'login' %}"><span>Login</a>
+    </div>
+    {% endif %}
+    <div class="container-fluid">
+      <form class="d-flex" role="search" method="GET" action="{% url 'home' %}">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search threads...." aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>&nbsp;&nbsp;&nbsp;
+        <h2 class="dev">Dev.to</h2>
+      </form>
+    </div>
+  </div>
+</nav>

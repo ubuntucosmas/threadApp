@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    h2,a,h3,h1,h5,h5,h6,h4,p{
+        font-family: "Suravaram", serif;
+        font-weight: 400;
+        font-style: normal;
+          }
+          
+</style>
+
+<section style="min-height: 100vh;">
+    {% if request.user.is_authenticated %}
+<p><a href='{% url "create-thread" %}' >Create a Thread</a></p>
+    {% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 bg-light border text-dark rounded">
+            <div><a href="{% url 'home' %}">All</a></div>
+            <h6>Browse Topics</h6>
+            {% for topic in topics %}
+            <div>
+                <a href="{% url 'home' %}?q={{topic.name}}">{{ topic.name }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-4 bg-dark text-white border mx-4 rounded overflow-auto p-3"style="max-height: 100vh;">
+            {% if thread_count == 0  %}
+            <h2>No Threads Found</h2>
+            {%  endif %}
+            {% for t in threads %}
+            <h4>{{thread_count}} Threads Available</h4>
+            <hr>
+            <span>
+                <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                class="rounded-circle"
+                height="22"
+                alt="Portrait of a Woman"
+                loading="lazy"
+              />
+            @{{t.host}}</span>&nbsp;&nbsp;
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'update-thread' t.id %}">Edit</a>
+            &nbsp;&nbsp;
+            <a href="{% url 'delete' t.id %}" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+            {% endif %}
+            <h5>Topic:{{t.topic.name}}</h5>
+            <p>Thread of the day: {{t.name}}<br>
+            {% if t.topic_image %}
+            <div><img src="{{t.topic_image.url}}" class="object-fit-cover border rounded" height="100" width=100></div>
+            {% endif %}
+                
+            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href='{% url "thread" t.id %}'>Join to Participate</a></p>
+            <hr>
+            {% endfor %}
+        </div>
+        
+        <div class="col-5 bg-light border text-dark rounded">
+            <h2>Threads</h2>
+        </div>
+
+    </div>
+</div>
+</section>
+{% endblock %}
+
+
+
+

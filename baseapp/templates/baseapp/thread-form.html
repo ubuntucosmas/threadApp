@@ -1,0 +1,24 @@
+{%extends 'main.html' %}
+{% load crispy_forms_tags %} 
+
+{% block content %}
+<body class="bg-image" 
+style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+       height: 100vh">
+
+<div class="container col-5 rounded mt-4 p-4 bg-light ">
+    <form method=POST action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.host|as_crispy_field}}
+        {{ form.topic|as_crispy_field}}
+        {{ form.name|as_crispy_field}}
+        {{ form.description|as_crispy_field}}
+        {{form.topic_image|as_crispy_field}}
+        <input type= "submit" value="Submit"/>
+        &nbsp;
+        <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href='{% url "home" %}'>Back to Home</a></p>
+    </form>
+
+</div>
+</body>
+{% endblock %}

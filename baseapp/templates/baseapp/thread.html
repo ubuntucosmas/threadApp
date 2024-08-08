@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+{% block content %}
+<section class="bg-dark bg-gradient" style="min-height: 100vh;">
+    {% if request.user.is_authenticated %}
+<p><a href='{% url "create-thread" %}'>Create a Thread</a></p>
+     {% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 bg-dark text-white border mx-4 rounded opacity-75">
+            <span>
+                <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                class="rounded-circle"
+                height="22"
+                alt="Portrait of a Woman"
+                loading="lazy"
+              />
+            @{{threads.host}}</span>
+            <h5>Topic:{{threads.topic.name}}</h5>
+            <p>Thread of the day: {{threads.name}}<br><br><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href='{% url "home" %}'>Back to Home</a></p>
+            <hr>
+        </div>
+        
+        <div class="col-8 bg-light border text-dark rounded">
+            <span>
+                <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                class="rounded-circle"
+                height="22"
+                alt="Portrait of a Woman"
+                loading="lazy"
+              />
+                @{{threads.host}}</span>{{threads.updated}}
+            <h5>{{threads.topic}}</h5>
+            <h6>{{threads.name}}</h6>
+            <p>{{threads.description}}</p>
+        </div>
+
+        
+
+    </div>
+</div>
+</section>
+
+{% endblock %}
